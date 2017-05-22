@@ -11,7 +11,7 @@ During one of my PhD investigations, I needed to log gaze allocations on a frame
 FLo can be downloaded pre-compiled for Linux (Windows version available shortly) and run as a standalone application. There is no requirement for installation. Simply download the project as a .zip, extract to a desired location and run the executable found in the build folder. You may need to tick run as an executable under the permissions of the file. The current version has been compiled and tested on Ubuntu 16.04. Alternatively feel free to compile the source code on your own machine. To do this you will need git and qt5. Then type the following into a terminal:
 
 sudo git clone https://github.com/N-M-T/FLo <br />
-cd FLo/build/Linux <br />
+cd FLo/build <br />
 sudo qmake ~/FLo/fixationLogger.pro <br />
 sudo make
 
