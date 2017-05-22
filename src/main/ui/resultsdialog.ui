@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>resultsDialog</class>
+ <widget class="QWidget" name="resultsDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>261</width>
+    <height>258</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Results</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>gibbon.jpg</normaloff>gibbon.jpg</iconset>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="1" column="0">
+    <widget class="QCheckBox" name="rawBox">
+     <property name="text">
+      <string>Raw data</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QPushButton" name="saveButton">
+     <property name="text">
+      <string>Save</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" colspan="2">
+    <widget class="QTableWidget" name="tableWidget">
+     <property name="editTriggers">
+      <set>QAbstractItemView::NoEditTriggers</set>
+     </property>
+     <row>
+      <property name="text">
+       <string>feat1</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>feat2</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>feat3</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>feat4</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>feat5</string>
+      </property>
+     </row>
+     <column>
+      <property name="text">
+       <string>Frequency</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Total duration</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QPushButton" name="cancelButton">
+     <property name="text">
+      <string>Cancel</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
