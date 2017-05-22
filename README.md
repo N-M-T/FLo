@@ -21,18 +21,18 @@ This will replace the pre-compiled static version already in the build folder wi
 
 The GUI was designed to be simple and intuitive. File > open will prompt the user to load a video file. The video can be played or rewound, or moved forward or back frame-by-frame using the media buttons and/or slider. The slider isn't particularly responsive so be patient on longer videos.  <br />
 
-![ScreenShot](https://github.com/N-M-T/VFLo/blob/master/screenshots/Screenshot%20from%202017-05-22%2011-51-40.png)  <br />
+![ScreenShot](https://github.com/N-M-T/FLo/blob/master/screenshots/Screenshot%20from%202017-05-22%2011-51-40.png)  <br />
 
 Features > Enter features will open a dialog box where you can enter fixated features within the video. These will then appear in the bottom right of the main window.  <br />
 
-![ScreenShot](https://github.com/N-M-T/VFLo/blob/master/screenshots/Screenshot%20from%202017-05-22%2011-59-04.png) ![Screenshot](https://github.com/N-M-T/VFLo/blob/master/screenshots/Screenshot%20from%202017-05-22%2012-01-38.png)
+![ScreenShot](https://github.com/N-M-T/FLo/blob/master/screenshots/Screenshot%20from%202017-05-22%2011-59-04.png) ![Screenshot](https://github.com/N-M-T/FLo/blob/master/screenshots/Screenshot%20from%202017-05-22%2012-01-38.png)
 <br />
 
 Note that the number of the feature now corresponds to its counterpart on your keyboard. Pressing the number will log a fixation of that particular feature and then move one frame forward in the video sequence. In cases where no gaze data were recorded due to blinking or sampling errors, pressing the right key in the main window will log as no fixation. Alternatively, you can delete previously logged fixated features and move back one frame by using the left key in the main window. Whilst fixations are being logged it is not possible to use the slider to seek through the video as this would disrupt the current feature logging method. Also note that currently it is not possible to add more features after the logging process has started - doing so will refresh the data thus deleting any previous logging. This will be amended soon. <br />
 
 Finally, Analyse > Basic will show each fixated feature, and the frequency and duration of fixations on that feature. <br />
 
-![ScreenShot](https://github.com/N-M-T/SwAT/blob/master/screenshots/Screenshot%20from%202017-05-22%2012-14-46.png) <br />
+![ScreenShot](https://github.com/N-M-T/FLo/blob/master/screenshots/Screenshot%20from%202017-05-22%2012-14-46.png) <br />
 
 ## License
 
