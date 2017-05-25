@@ -243,9 +243,6 @@ void MainWindow::on_rightButton_clicked()
 {
     if(myPlayer->isStopped() && myPlayer->getCurrentFrame() < frames)
     {
-        myPlayer->right();
-        ui->frameLabel->setText(QString::number(myPlayer->getCurrentFrame()));
-
         if(!feat1.isEmpty()) //add no fixation to vectors
         {
             x_forAxis.append(myPlayer->getCurrentFrame() / fps);
@@ -257,6 +254,8 @@ void MainWindow::on_rightButton_clicked()
 
             ui->textBrowser->setText("No fixation");
         }
+        myPlayer->right();
+        ui->frameLabel->setText(QString::number(myPlayer->getCurrentFrame()));
     }
 }
 
