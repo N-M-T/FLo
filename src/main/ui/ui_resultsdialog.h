@@ -35,7 +35,7 @@ public:
     {
         if (resultsDialog->objectName().isEmpty())
             resultsDialog->setObjectName(QStringLiteral("resultsDialog"));
-        resultsDialog->resize(261, 258);
+        resultsDialog->resize(403, 278);
         QIcon icon;
         icon.addFile(QStringLiteral("gibbon.jpg"), QSize(), QIcon::Normal, QIcon::Off);
         resultsDialog->setWindowIcon(icon);
@@ -53,24 +53,28 @@ public:
         gridLayout->addWidget(saveButton, 2, 0, 1, 1);
 
         tableWidget = new QTableWidget(resultsDialog);
-        if (tableWidget->columnCount() < 2)
-            tableWidget->setColumnCount(2);
+        if (tableWidget->columnCount() < 3)
+            tableWidget->setColumnCount(3);
         QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
         tableWidget->setHorizontalHeaderItem(0, __qtablewidgetitem);
         QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
         tableWidget->setHorizontalHeaderItem(1, __qtablewidgetitem1);
-        if (tableWidget->rowCount() < 5)
-            tableWidget->setRowCount(5);
         QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(0, __qtablewidgetitem2);
+        tableWidget->setHorizontalHeaderItem(2, __qtablewidgetitem2);
+        if (tableWidget->rowCount() < 6)
+            tableWidget->setRowCount(6);
         QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(1, __qtablewidgetitem3);
+        tableWidget->setVerticalHeaderItem(0, __qtablewidgetitem3);
         QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(2, __qtablewidgetitem4);
+        tableWidget->setVerticalHeaderItem(1, __qtablewidgetitem4);
         QTableWidgetItem *__qtablewidgetitem5 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(3, __qtablewidgetitem5);
+        tableWidget->setVerticalHeaderItem(2, __qtablewidgetitem5);
         QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(4, __qtablewidgetitem6);
+        tableWidget->setVerticalHeaderItem(3, __qtablewidgetitem6);
+        QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
+        tableWidget->setVerticalHeaderItem(4, __qtablewidgetitem7);
+        QTableWidgetItem *__qtablewidgetitem8 = new QTableWidgetItem();
+        tableWidget->setVerticalHeaderItem(5, __qtablewidgetitem8);
         tableWidget->setObjectName(QStringLiteral("tableWidget"));
         tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
@@ -93,19 +97,23 @@ public:
         rawBox->setText(QApplication::translate("resultsDialog", "Raw data", 0));
         saveButton->setText(QApplication::translate("resultsDialog", "Save", 0));
         QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QApplication::translate("resultsDialog", "Frequency", 0));
+        ___qtablewidgetitem->setText(QApplication::translate("resultsDialog", "Number", 0));
         QTableWidgetItem *___qtablewidgetitem1 = tableWidget->horizontalHeaderItem(1);
         ___qtablewidgetitem1->setText(QApplication::translate("resultsDialog", "Total duration", 0));
-        QTableWidgetItem *___qtablewidgetitem2 = tableWidget->verticalHeaderItem(0);
-        ___qtablewidgetitem2->setText(QApplication::translate("resultsDialog", "feat1", 0));
-        QTableWidgetItem *___qtablewidgetitem3 = tableWidget->verticalHeaderItem(1);
-        ___qtablewidgetitem3->setText(QApplication::translate("resultsDialog", "feat2", 0));
-        QTableWidgetItem *___qtablewidgetitem4 = tableWidget->verticalHeaderItem(2);
-        ___qtablewidgetitem4->setText(QApplication::translate("resultsDialog", "feat3", 0));
-        QTableWidgetItem *___qtablewidgetitem5 = tableWidget->verticalHeaderItem(3);
-        ___qtablewidgetitem5->setText(QApplication::translate("resultsDialog", "feat4", 0));
-        QTableWidgetItem *___qtablewidgetitem6 = tableWidget->verticalHeaderItem(4);
-        ___qtablewidgetitem6->setText(QApplication::translate("resultsDialog", "feat5", 0));
+        QTableWidgetItem *___qtablewidgetitem2 = tableWidget->horizontalHeaderItem(2);
+        ___qtablewidgetitem2->setText(QApplication::translate("resultsDialog", "Percentage", 0));
+        QTableWidgetItem *___qtablewidgetitem3 = tableWidget->verticalHeaderItem(0);
+        ___qtablewidgetitem3->setText(QApplication::translate("resultsDialog", "feat1", 0));
+        QTableWidgetItem *___qtablewidgetitem4 = tableWidget->verticalHeaderItem(1);
+        ___qtablewidgetitem4->setText(QApplication::translate("resultsDialog", "feat2", 0));
+        QTableWidgetItem *___qtablewidgetitem5 = tableWidget->verticalHeaderItem(2);
+        ___qtablewidgetitem5->setText(QApplication::translate("resultsDialog", "feat3", 0));
+        QTableWidgetItem *___qtablewidgetitem6 = tableWidget->verticalHeaderItem(3);
+        ___qtablewidgetitem6->setText(QApplication::translate("resultsDialog", "feat4", 0));
+        QTableWidgetItem *___qtablewidgetitem7 = tableWidget->verticalHeaderItem(4);
+        ___qtablewidgetitem7->setText(QApplication::translate("resultsDialog", "feat5", 0));
+        QTableWidgetItem *___qtablewidgetitem8 = tableWidget->verticalHeaderItem(5);
+        ___qtablewidgetitem8->setText(QApplication::translate("resultsDialog", "noFixation", 0));
         cancelButton->setText(QApplication::translate("resultsDialog", "Cancel", 0));
     } // retranslateUi
 

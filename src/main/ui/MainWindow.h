@@ -36,6 +36,7 @@
 #include <QMessageBox>
 #include <QTime>
 #include <QString>
+#include <QLinkedList>
 
 #include <QKeyEvent>
 #include <QApplication>
@@ -60,13 +61,11 @@ private:
     QString feat3;
     QString feat4;
     QString feat5;
-    int length;
-    int frames;
-    int fps;
+    double frames;
+    double fps;
     QString filename;
     QFileInfo name;
-
-    QVector<double> x_forAxis, featNoAdded, feat1Added, feat2Added, feat3Added, feat4Added, feat5Added;
+    QVector<double> x_forAxis, featNoAdded, feat1Added, feat2Added, feat3Added, feat4Added, feat5Added, noFixation;
 
 public:
     explicit MainWindow(QWidget *parent = 0);

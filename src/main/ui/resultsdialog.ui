@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>261</width>
-    <height>258</height>
+    <width>403</width>
+    <height>278</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -65,14 +65,24 @@
        <string>feat5</string>
       </property>
      </row>
+     <row>
+      <property name="text">
+       <string>noFixation</string>
+      </property>
+     </row>
      <column>
       <property name="text">
-       <string>Frequency</string>
+       <string>Number</string>
       </property>
      </column>
      <column>
       <property name="text">
        <string>Total duration</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Percentage</string>
       </property>
      </column>
     </widget>

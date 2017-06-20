@@ -152,11 +152,14 @@ void MainWindow::load_refreshVideo()
     //clear old elements
     if(!feat1.isEmpty())
     {
+        /*
         feat1.clear();
         feat2.clear();
         feat3.clear();
         feat4.clear();
         feat5.clear();
+        */
+        ui->horizontalSlider->setEnabled(false);
 
         x_forAxis.resize(0);
         featNoAdded.resize(0);
@@ -165,6 +168,7 @@ void MainWindow::load_refreshVideo()
         feat3Added.resize(0);
         feat4Added.resize(0);
         feat5Added.resize(0);
+        noFixation.resize(0);
     }
 
     myPlayer->setCurrentFrame(0);
@@ -234,7 +238,8 @@ void MainWindow::on_leftButton_clicked()
                 feat5Added.removeLast();
             }
 
-            ui->textBrowser->setText("Fixation deleted");
+            noFixation.removeLast();
+            ui->textBrowser->setText("Deleted");
         }
     }
 }
@@ -250,8 +255,8 @@ void MainWindow::on_rightButton_clicked()
             feat2Added.append(0);
             feat3Added.append(0);
             feat4Added.append(0);
-            feat5Added.append(0); //using binary to indicate whether feature was fixated or not
-
+            feat5Added.append(0);
+            noFixation.append(1); //using binary to indicate whether feature was fixated or not
             ui->textBrowser->setText("No fixation");
         }
         myPlayer->right();
@@ -364,6 +369,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
                 feat3Added.append(0);
                 feat4Added.append(0);
                 feat5Added.append(0);
+                noFixation.append(0);
 
                 ui->feat1Lab->setEnabled(true);
                 ui->textBrowser->setText("Fixation added");
@@ -384,6 +390,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
                 feat3Added.append(0);
                 feat4Added.append(0);
                 feat5Added.append(0);
+                noFixation.append(0);
 
                 ui->feat2Lab->setEnabled(true);
                 ui->textBrowser->setText("Fixation added");
@@ -404,6 +411,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
                 feat3Added.append(1);
                 feat4Added.append(0);
                 feat5Added.append(0);
+                noFixation.append(0);
 
                 ui->feat3Lab->setEnabled(true);
                 ui->textBrowser->setText("Fixation added");
@@ -424,6 +432,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
                 feat3Added.append(0);
                 feat4Added.append(1);
                 feat5Added.append(0);
+                noFixation.append(0);
 
                 ui->feat4Lab->setEnabled(true);
                 ui->textBrowser->setText("Fixation added");
@@ -444,6 +453,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
                 feat3Added.append(0);
                 feat4Added.append(0);
                 feat5Added.append(1);
+                noFixation.append(0);
 
                 ui->feat5Lab->setEnabled(true);
                 ui->textBrowser->setText("Fixation added");
@@ -512,8 +522,11 @@ QString MainWindow::getFormattedTime(double timeInSeconds)
 void MainWindow::on_actionBasic_triggered()
 {
     myResultsDialog = new resultsDialog;
-    myResultsDialog->passVectors(x_forAxis, feat1Added, feat2Added, feat3Added, feat4Added, feat5Added);
-    myResultsDialog->outcomeMeasures(feat1, feat2, feat3, feat4, feat5);
+    //pass all information to results window
+    myResultsDialog->passFeatures(feat1, feat2, feat3, feat4, feat5);
+    myResultsDialog->passVectors(x_forAxis, feat1Added, feat2Added, feat3Added, feat4Added, feat5Added, noFixation);
     myResultsDialog->passFilename(filename);
+    //calculate and display outcome variables
+    myResultsDialog->outcomeMeasures();
     myResultsDialog->show();
 }

@@ -42,8 +42,18 @@ resultsDialog::~resultsDialog()
     delete ui;
 }
 
+
+void resultsDialog::passFeatures(QString feat1, QString feat2, QString feat3, QString feat4, QString feat5)
+{
+    Feat1 = feat1;
+    Feat2 = feat2;
+    Feat3 = feat3;
+    Feat4 = feat4;
+    Feat5 = feat5;
+}
+
 void resultsDialog::passVectors(QVector<double> x_forAxis, QVector<double> feat1Added, QVector<double> feat2Added,
-                QVector<double> feat3Added, QVector<double> feat4Added, QVector<double> feat5Added)
+                QVector<double> feat3Added, QVector<double> feat4Added, QVector<double> feat5Added, QVector<double> noFixation)
 {
     times = x_forAxis;
     feat1Add = feat1Added;
@@ -51,6 +61,7 @@ void resultsDialog::passVectors(QVector<double> x_forAxis, QVector<double> feat1
     feat3Add = feat3Added;
     feat4Add = feat4Added;
     feat5Add = feat5Added;
+    nofixation = noFixation;
 }
 
 void resultsDialog::passFilename(QString fileName)
@@ -58,66 +69,45 @@ void resultsDialog::passFilename(QString fileName)
     file = fileName.section(".",0,0); //remove file extension
 }
 
-void resultsDialog::outcomeMeasures(QString feat1, QString feat2, QString feat3, QString feat4, QString feat5)
-{
-    if(!feat1.isEmpty())
-    {
-        setData1(feat1, fixationNumberFinder(feat1Add), fixationDurationFinder(feat1Add));
-    }
-
-    if(!feat2.isEmpty())
-    {
-        setData2(feat2, fixationNumberFinder(feat2Add), fixationDurationFinder(feat2Add));
-    }
-
-    if(!feat3.isEmpty())
-    {
-        setData3(feat3, fixationNumberFinder(feat3Add), fixationDurationFinder(feat3Add));
-    }
-
-    if(!feat4.isEmpty())
-    {
-        setData4(feat4, fixationNumberFinder(feat4Add), fixationDurationFinder(feat4Add));
-    }
-
-    if(!feat5.isEmpty())
-    {
-        setData5(feat5, fixationNumberFinder(feat5Add), fixationDurationFinder(feat5Add));
-    }
-}
-
 //function to find number of fixations logged as ones in QVector
-int resultsDialog::fixationNumberFinder(QVector<double> inputVector)
+//does not log as new fixation on the same object after no data collected
+void resultsDialog::fixationNumberFinder()
 {
-    bool fixation = false;
-    int fixations = 0;
+    int feat = 0;
+    fixation1 = 0;
+    fixation2 = 0;
+    fixation3 = 0;
+    fixation4 = 0;
+    fixation5 = 0;
 
-    //find single fixation at start
-    if(inputVector.size()==1 && inputVector[0]==1)
+    for(int i = 0; i < times.size(); i++)
     {
-        fixations++;
-    }
-
-    //find clumps of fixations or subsequent single fixations later on
-    for(int i = 0; i < inputVector.size(); i++)
-    {
-        if((inputVector[i] == inputVector[i+1] && inputVector[i] == 1)
-            || (inputVector[i-1] == 0 && inputVector[i]==1)
-            || (inputVector[i] == 1 && inputVector[i+1]==0))
+        if(feat1Add[i] == 1 && (!(feat==1)))
         {
-            //this is a fixation
-            if(!fixation)
-            {
-                fixation = true;
-                fixations++;
-            }
+            fixation1++;
+            feat = 1;
         }
-        else
+        if(feat2Add[i] == 1 && (!(feat==2)))
         {
-            fixation = false;
+            fixation2++;
+            feat = 2;
+        }
+        if(!Feat3.isEmpty() && feat3Add[i] == 1 && (!(feat==3)))
+        {
+            fixation3++;
+            feat = 3;
+        }
+        if(!Feat4.isEmpty() && feat4Add[i] == 1 && (!(feat==4)))
+        {
+            fixation4++;
+            feat = 4;
+        }
+        if(!Feat5.isEmpty() && feat5Add[i] == 1 && (!(feat==5)))
+        {
+            fixation5++;
+            feat = 5;
         }
     }
-    return fixations;
 }
 
 //function to find duration of fixations logged in QVector
@@ -137,39 +127,120 @@ double resultsDialog::fixationDurationFinder(QVector<double> inputVector)
     return duration;
 }
 
-void resultsDialog::setData1(QString feat1, int fixations1, double durations1)
+int resultsDialog::noFixationFinder(QVector<double> inputVector)
+{
+    bool fixation = false;
+    int fixations = 0;
+
+    //find single fixation at start
+    if(inputVector.size()==1 && inputVector[0]==1)
+    {
+        fixations++;
+    }
+
+    //find clumps of fixations or subsequent single fixations later on
+    for(int i = 0; i < inputVector.size(); i++)
+    {
+        if((inputVector[i] == inputVector[i+1] && inputVector[i] == 1)
+            || (inputVector[i-1] == 0 && inputVector[i]==1)
+            || (inputVector[i] == 1 && inputVector[i+1]==0))
+        {
+            if(!fixation)
+            {
+                fixation = true;
+                fixations++;
+            }
+        }
+        else
+        {
+            fixation = false;
+        }
+    }
+    return fixations;
+}
+
+void resultsDialog::outcomeMeasures()
+{
+    fixationNumberFinder();
+
+    double vidduration = 0;
+    for(int i = 0; i < times.size(); i++)
+    {
+        vidduration += times[0];
+    }
+
+    setData1(Feat1, fixation1, fixationDurationFinder(feat1Add),
+                fixationDurationFinder(feat1Add) / vidduration * 100);
+
+    if(!Feat1.isEmpty())
+    {
+        setData2(Feat2, fixation2, fixationDurationFinder(feat2Add),
+                fixationDurationFinder(feat2Add) / vidduration * 100);
+    }
+    if(!Feat3.isEmpty())
+    {
+        setData3(Feat3, fixation3, fixationDurationFinder(feat3Add),
+                fixationDurationFinder(feat3Add) / vidduration * 100);
+    }
+    if(!Feat4.isEmpty())
+    {
+    setData4(Feat4, fixation4, fixationDurationFinder(feat4Add),
+                fixationDurationFinder(feat4Add) / vidduration * 100);
+    }
+    if(!Feat5.isEmpty())
+    {
+    setData5(Feat5, fixation5, fixationDurationFinder(feat5Add),
+                fixationDurationFinder(feat5Add) / vidduration * 100);
+    }
+    setNoFixation(noFixationFinder(nofixation), fixationDurationFinder(nofixation),
+                fixationDurationFinder(nofixation) / vidduration * 100);
+}
+
+void resultsDialog::setData1(QString feat1, int fixations1, double durations1, double percentage1)
 {
     ui->tableWidget->verticalHeaderItem(0)->setText(feat1);
     ui->tableWidget->setItem(0,0, new QTableWidgetItem(QString::number(fixations1, 'g', 3)));
     ui->tableWidget->setItem(0,1, new QTableWidgetItem(QString::number(durations1, 'f', 2)));
+    ui->tableWidget->setItem(0,2, new QTableWidgetItem(QString::number((int)percentage1)));
 }
 
-void resultsDialog::setData2(QString feat2, int fixations2, double durations2)
+void resultsDialog::setData2(QString feat2, int fixations2, double durations2, double percentage2)
 {
     ui->tableWidget->verticalHeaderItem(1)->setText(feat2);
     ui->tableWidget->setItem(1,0, new QTableWidgetItem(QString::number(fixations2, 'g', 3)));
     ui->tableWidget->setItem(1,1, new QTableWidgetItem(QString::number(durations2, 'f', 2)));
+    ui->tableWidget->setItem(1,2, new QTableWidgetItem(QString::number((int)percentage2)));
 }
 
-void resultsDialog::setData3(QString feat3, int fixations3, double durations3)
+void resultsDialog::setData3(QString feat3, int fixations3, double durations3, double percentage3)
 {
     ui->tableWidget->verticalHeaderItem(2)->setText(feat3);
     ui->tableWidget->setItem(2,0, new QTableWidgetItem(QString::number(fixations3, 'g', 3)));
     ui->tableWidget->setItem(2,1, new QTableWidgetItem(QString::number(durations3, 'f', 2)));
+    ui->tableWidget->setItem(2,2, new QTableWidgetItem(QString::number((int)percentage3)));
 }
 
-void resultsDialog::setData4(QString feat4, int fixations4, double durations4)
+void resultsDialog::setData4(QString feat4, int fixations4, double durations4, double percentage4)
 {
     ui->tableWidget->verticalHeaderItem(3)->setText(feat4);
     ui->tableWidget->setItem(3,0, new QTableWidgetItem(QString::number(fixations4, 'g', 3)));
     ui->tableWidget->setItem(3,1, new QTableWidgetItem(QString::number(durations4, 'f', 2)));
+    ui->tableWidget->setItem(3,2, new QTableWidgetItem(QString::number((int)percentage4)));
 }
 
-void resultsDialog::setData5(QString feat5, int fixations5, double durations5)
+void resultsDialog::setData5(QString feat5, int fixations5, double durations5, double percentage5)
 {
     ui->tableWidget->verticalHeaderItem(4)->setText(feat5);
     ui->tableWidget->setItem(4,0, new QTableWidgetItem(QString::number(fixations5, 'g', 3)));
     ui->tableWidget->setItem(4,1, new QTableWidgetItem(QString::number(durations5, 'f', 2)));
+    ui->tableWidget->setItem(4,2, new QTableWidgetItem(QString::number((int)percentage5)));
+}
+
+void resultsDialog::setNoFixation(int noFixation, double noDur, double noPercentage)
+{
+    ui->tableWidget->setItem(5,0, new QTableWidgetItem(QString::number(noFixation, 'g', 3)));
+    ui->tableWidget->setItem(5,1, new QTableWidgetItem(QString::number(noDur, 'f', 2)));
+    ui->tableWidget->setItem(5,2, new QTableWidgetItem(QString::number((int)noPercentage)));
 }
 
 void resultsDialog::on_saveButton_clicked()
@@ -205,11 +276,13 @@ void resultsDialog::on_saveButton_clicked()
                     ui->tableWidget->verticalHeaderItem(row)->setText("");
                     ui->tableWidget->setItem(row, 0, new QTableWidgetItem(""));
                     ui->tableWidget->setItem(row, 1, new QTableWidgetItem(""));
+                    ui->tableWidget->setItem(row, 2, new QTableWidgetItem(""));
                 }
 
                 strList << ui->tableWidget->verticalHeaderItem(row)-> data(Qt::DisplayRole).toString() + "   "
                                 + ui->tableWidget->item(row, 0)->text() + "   "
-                                + ui->tableWidget->item(row, 1)->text();
+                                + ui->tableWidget->item(row, 1)->text() + "   "
+                                + ui->tableWidget->item(row, 2)->text();
 
                 results << strList.join( ";" ) + "\n";
             }
@@ -232,7 +305,7 @@ void resultsDialog::on_saveButton_clicked()
                 for( int i = 0; i < times.size(); i++)
                 {
                     out << times[i] << "," << feat1Add[i] << "," << feat2Add[i]<< ","
-                    << feat3Add[i]<< "," << feat4Add[i]<< "," << feat5Add[i] << "\n";
+                    << feat3Add[i]<< "," << feat4Add[i]<< "," << feat5Add[i]<< "," << nofixation[i] <<"\n";
                 }
             }
             fileRaw.close();
