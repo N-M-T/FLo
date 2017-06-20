@@ -11,7 +11,7 @@ During one of my PhD investigations, I needed to log gaze allocations on a frame
 Feel free to compile the source code on your own machine. To do this you will need git and qt5. Then type the following into a terminal:
 
 sudo git clone https://github.com/N-M-T/FLo <br />
-mkdir FLo/build <br />
+sudo mkdir FLo/build <br />
 cd FLo/build <br />
 sudo qmake ~/FLo/fixationLogger.pro <br />
 sudo make
