@@ -1,6 +1,6 @@
 ## Synopsis
 
-Fixation Logger (FLo) is a simple GUI application allowing users to import video sequences superimposed with gaze fixations recorded from eye tracking equipment, and log features frame-by-frame by a single key press. It is built on C++ with Qt.
+Fixation Logger (FLo) is a simple Linux GUI application allowing users to import video sequences superimposed with gaze fixations recorded from eye tracking equipment, and log features frame-by-frame by a single key press. It is built on C++ with Qt.
 
 ## Motivation
 
