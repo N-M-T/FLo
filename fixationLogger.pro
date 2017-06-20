@@ -34,6 +34,6 @@ FORMS += \
 
 LIBS += -L/usr/local/lib -lopencv_core -lopencv_imgproc -lopencv_videoio -lopencv_highgui
 
-UI_DIR=src/main/ui
+UI_DIR=ui_h
 OBJECTS_DIR=.obj
 MOC_DIR=.moc
